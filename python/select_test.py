@@ -4,7 +4,7 @@ import psycopg2
 from datetime import datetime
 import time
 
-query_execution_count = 5
+query_execution_count = 25
 print_results = False
 queries = [ """select * from ci_at_mv_isshowed_shs_until
                 where ci_at_mv_isshowed_shs_until_changedat < '2022-01-01 00:00:00';""",
