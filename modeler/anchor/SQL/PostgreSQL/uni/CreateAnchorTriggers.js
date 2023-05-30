@@ -215,9 +215,10 @@ CREATE OR REPLACE FUNCTION $anchor.capsule\.itu_l$anchor.name() RETURNS trigger 
     while (attribute = anchor.nextAttribute()) {
         knot = attribute.knot;
 
+        if(attribute.isDeletable()) {
 /*~        
 
-        IF NEW.$attribute.valueColumnName IS NULL THEN
+        IF NEW.$attribute.valueColumnName IS NULL AND NEW.$attribute.deletableColumnName = 1 THEN
 
             CREATE TABLE IF NOT EXISTS $anchor.capsule\.$attribute.deletionName AS SELECT *, null::timestamp as $attribute.deletionTimeColumnName FROM $attribute.capsule\.$attribute.name WHERE FALSE;
 
@@ -225,9 +226,14 @@ CREATE OR REPLACE FUNCTION $anchor.capsule\.itu_l$anchor.name() RETURNS trigger 
             (DELETE FROM $attribute.capsule\.$attribute.name WHERE $attribute.anchorReferenceName = OLD.$anchor.identityColumnName RETURNING *) 
 	        INSERT INTO $anchor.capsule\.$attribute.deletionName SELECT *,  localtimestamp(0) FROM tmp where $attribute.anchorReferenceName = OLD.$anchor.identityColumnName;
 
-        ELSIF OLD.$attribute.valueColumnName <> NEW.$attribute.valueColumnName THEN   
-
+        END IF;
+       
 ~*/
+        }
+/*~
+        IF NEW.$attribute.valueColumnName IS NOT NULL AND OLD.$attribute.valueColumnName <> NEW.$attribute.valueColumnName THEN   
+~*/        
+
         if(attribute.timeRange){
 /*~         
             INSERT INTO $attribute.capsule\.$attribute.name(
