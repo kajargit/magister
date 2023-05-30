@@ -218,7 +218,7 @@ CREATE OR REPLACE FUNCTION $anchor.capsule\.itu_l$anchor.name() RETURNS trigger 
         if(attribute.isDeletable()) {
 /*~        
 
-        IF NEW.$attribute.valueColumnName IS NULL AND NEW.$attribute.deletableColumnName = 1 THEN
+        IF NEW.$attribute.valueColumnName IS NULL AND NEW.$attribute.deletableColumnName = true THEN
 
             CREATE TABLE IF NOT EXISTS $anchor.capsule\.$attribute.deletionName AS SELECT *, null::timestamp as $attribute.deletionTimeColumnName FROM $attribute.capsule\.$attribute.name WHERE FALSE;
 
